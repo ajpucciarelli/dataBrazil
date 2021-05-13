@@ -1,5 +1,5 @@
 # Exemplo de busca e dados
-import json
+#import json
 import requests
 
 url_deputados = "https://dadosabertos.camara.leg.br/api/v2/deputados?dataInicio=2020-01-01&dataFim=2021-12-31&ordem=ASC&ordenarPor=nome"
