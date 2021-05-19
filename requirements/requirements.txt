@@ -12,3 +12,4 @@ Werkzeug==1.0.1
 alembic==1.6.2
 PyMySQL==1.0.2
 cryptography==3.4.7
+requests==2.25.1
