@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Text
 from dao.engine import engine, Base
 from dataclasses import dataclass
 
+
 @dataclass
 class Deputado(Base):
     __tablename__ = 'deputado'
@@ -25,11 +26,12 @@ class Deputado(Base):
     idLegislatura = Column(Integer, nullable=False)
     urlFoto = Column(Text(), nullable=True)
     email = Column(Text(), nullable=True)
-    
-    #alembic revision --autogenerate -m "Nova colunas na tabela deputado"
-    #alembic upgrade head
+
+    # alembic revision --autogenerate -m "Nova colunas na tabela deputado"
+    # alembic upgrade head
 
     def __repr__(self):
         return "<Deputado(id='%s', nome='%s')>" % (self.id, self.nome)
+
 
 Base.metadata.create_all(engine)
