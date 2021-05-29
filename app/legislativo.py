@@ -1,7 +1,8 @@
 # Exemplo de busca e dados
 # import json
 # from dao.engine import session
-from dao.deputado_dao import DeputadoDao
+from model.congresso.despesa import DespesaDeputado
+from dao.deputado_dao import DeputadoDao, DeputadoDespesaDao
 # from model.congresso.deputado import Deputado
 
 import requests
@@ -34,4 +35,6 @@ headers_desp = {
 
 response_despesas = requests.request(
     "GET", url_despesas_filter, headers=headers_desp, data=payload_desp)
-print(response_despesas.json()["dados"][0])
+DeputadoDespesaDao.insert_or_update(response_despesas.json()["dados"], 204554)
+# print(response_despesas.json()["dados"][0])
+# print(response_despesas.json()["dados"][0].keys())

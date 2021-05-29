@@ -1,6 +1,7 @@
 from sqlalchemy.sql.expression import text
 from dao.engine import session
-from model.congresso.deputado import Deputado
+# from model.congresso.deputado import Deputado
+# from model.congresso.despesa import DespesaDeputado
 # from model.congresso.despesa
 
 
@@ -20,8 +21,6 @@ class DeputadoDao:
     @commit_close
     def insert_or_update(deputados):
 
-        #stmt = text("SELECT * FROM Deputado WHERE users.name BETWEEN :x AND :y")
-        #stmt = stmt.bindparams(x="m", y="z")
         stmt = text("REPLACE INTO legislativo.deputado(id, nome, uri, siglaPartido, uriPartido,\
             siglaUf, idLegislatura, urlFoto, email) VALUES(:id, :nome, :uri,\
             :siglaPartido, :uriPartido, :siglaUf, :idLegislatura, :urlFoto,\
@@ -50,4 +49,40 @@ class DeputadoDao:
         #             )
         #         ]
         #     )
+        session.flush()
+
+
+class DeputadoDespesaDao:
+    @commit_close
+    def insert_or_update(despesas, id_deputado):
+        stmt = text("REPLACE INTO legislativo.deputado_despesa(codDocumento, \
+            ano, mes, id_deputado, tipoDespesa, tipoDocumento, \
+            codTipoDocumento, dataDocumento, numDocumento, valorDocumento, \
+            urlDocumento, nomeFornecedor, cnpjCpfFornecedor, valorLiquido, \
+            valorGlosa, numRessarcimento, codLote, parcela) VALUES( \
+            :codDocumento, :ano, :mes, "+str(id_deputado)+", :tipoDespesa, \
+            :tipoDocumento, :codTipoDocumento, :dataDocumento, :numDocumento, \
+            :valorDocumento, :urlDocumento, :nomeFornecedor, \
+            :cnpjCpfFornecedor, :valorLiquido, :valorGlosa, \
+            :numRessarcimento, :codLote, :parcela);")
+        stmt = stmt.bindparams(
+            codDocumento="codDocumento",
+            ano="ano",
+            mes="mes",
+            # id_deputado="id_deputado",
+            tipoDespesa="tipoDespesa",
+            tipoDocumento="tipoDocumento",
+            codTipoDocumento="codTipoDocumento",
+            dataDocumento="dataDocumento",
+            numDocumento="numDocumento",
+            valorDocumento="valorDocumento",
+            urlDocumento="urlDocumento",
+            nomeFornecedor="nomeFornecedor",
+            cnpjCpfFornecedor="cnpjCpfFornecedor",
+            valorLiquido="valorLiquido",
+            valorGlosa="valorGlosa",
+            numRessarcimento="numRessarcimento",
+            codLote="codLote",
+            parcela="parcela")
+        session.execute(stmt, despesas)
         session.flush()

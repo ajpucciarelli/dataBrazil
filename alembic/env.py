@@ -1,3 +1,4 @@
+from dao.engine import Base
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -6,6 +7,7 @@ from sqlalchemy import pool
 from alembic import context
 from dao.engine import URL_MYSQL
 from model.congresso.deputado import Deputado
+from model.congresso.despesa import DespesaDeputado
 
 
 # this is the Alembic Config object, which provides
@@ -25,7 +27,6 @@ config.set_main_option("sqlalchemy.url", URL_MYSQL)
 #alembic_config = config.get_section(fileConfig.config_ini_section)
 #alembic_config['sqlalchemy.url'] = URL_MYSQL
 
-from dao.engine import Base
 target_metadata = Base.metadata
 #target_metadata = None
 

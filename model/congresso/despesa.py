@@ -55,4 +55,4 @@ class DespesaDeputado(Base):
                                       self.valorDocumento)
 
 
-# Base.metadata.create_all(engine)
+Base.metadata.create_all(engine)
