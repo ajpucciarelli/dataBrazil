@@ -32,7 +32,7 @@ class DeputadoDao:
                                idLegislatura="idLegislatura",
                                urlFoto="urlFoto",
                                email="email")
-        session.execute(stmt, deputados['dados'])
+        session.execute(stmt, deputados)
         # for deputado in deputados['dados']:
         #     session.add_all(
         #         [
